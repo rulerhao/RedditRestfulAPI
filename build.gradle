@@ -8,6 +8,9 @@ buildscript {
         roomVersion = '2.4.2'
         compose_version = '1.4.0-alpha02'
         landscapist_glide_version = '1.5.2'
+        retrofit_version = '2.9.0'
+        httplogging_version = '5.0.0-alpha.10'
+        gson_version = '2.10'
     }
     repositories {
         google()
