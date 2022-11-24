@@ -1,11 +1,20 @@
 package com.rulhouse.redditrestfulapi.model.reddit.use_case
 
-import retrofit2.Response
+import java.util.concurrent.Flow
 
 class RedditApiImpl(private val apiService: RedditApiService): RedditApiRepository {
 
-    override suspend fun getFirstPost(): Response<RedditPosts> {
-        return apiService.getPosts(5, "a")
+    override val limit = 5
+
+    override suspend fun getFirstPost(): Flow<BaseResult<>> {
+        val result = apiService.getFirstPosts(limit)
+        if (result.isSuccessful) {
+//            result.body().data.children
+            return Flow<>
+        } else {
+
+        }
+        return apiService.getFirstPosts(limit)
     }
 
 }
