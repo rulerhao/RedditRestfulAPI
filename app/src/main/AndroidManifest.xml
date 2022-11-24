@@ -17,7 +17,7 @@
         android:theme="@style/Theme.RedditRestfulAPI"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.RedditRestfulAPI">
             <intent-filter>

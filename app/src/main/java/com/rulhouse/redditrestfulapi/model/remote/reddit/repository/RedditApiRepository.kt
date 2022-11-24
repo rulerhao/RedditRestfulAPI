@@ -9,7 +9,7 @@ interface RedditApiRepository {
 
     val limit: Int
     var lastName: String
-    suspend fun getFirstPostCall(): Flow<BaseResult<List<Children>, Int>>
+//    val childrens: List<Children>
     suspend fun getFirstPost(): Flow<BaseResult<List<Children>, Int>>
     suspend fun getNextPosts(): Flow<BaseResult<List<Children>, Int>>
 }
