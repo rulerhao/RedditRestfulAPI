@@ -1,4 +1,4 @@
-package com.rulhouse.redditrestfulapi.model.reddit.use_case
+package com.rulhouse.redditrestfulapi.model.remote.response
 
 sealed class BaseResult <out T: Any, out U: Any> {
     data class Success <T: Any>(val data: T): BaseResult<T, Nothing>()

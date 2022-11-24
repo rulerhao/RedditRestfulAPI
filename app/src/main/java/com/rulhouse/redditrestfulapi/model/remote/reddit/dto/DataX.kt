@@ -1,4 +1,4 @@
-package com.rulhouse.redditrestfulapi.model.reddit.dto
+package com.rulhouse.redditrestfulapi.model.remote.reddit.dto
 
 data class DataX(
     val all_awardings: List<AllAwarding>,

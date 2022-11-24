@@ -1,5 +1,11 @@
-package com.rulhouse.redditrestfulapi.model.reddit.use_case
+package com.rulhouse.redditrestfulapi.model.remote.reddit.di
 
+import com.rulhouse.redditrestfulapi.model.remote.reddit.impl.RedditApiImpl
+import com.rulhouse.redditrestfulapi.model.remote.reddit.repository.RedditApiRepository
+import com.rulhouse.redditrestfulapi.model.remote.reddit.service.RedditApiService
+import com.rulhouse.redditrestfulapi.model.remote.reddit.use_case.GetFirstPosts
+import com.rulhouse.redditrestfulapi.model.remote.reddit.use_case.GetNextPosts
+import com.rulhouse.redditrestfulapi.model.remote.reddit.use_case.RedditApiUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,7 +60,8 @@ object RedditApiModule {
     @Provides
     fun provideRedditApiUseCases(repository: RedditApiRepository): RedditApiUseCases {
         return RedditApiUseCases(
-            getFirstPost = GetFirstPost(repository)
+            getFirstPosts = GetFirstPosts(repository),
+            getNextPosts = GetNextPosts(repository)
         )
     }
 }
