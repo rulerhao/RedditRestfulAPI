@@ -66,6 +66,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
+    implementation "androidx.compose.material:material:$compose_version"
     // Material 3
     implementation 'androidx.compose.material3:material3:1.1.0-alpha02'
 
@@ -83,6 +84,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$httplogging_version"
     implementation "com.google.code.gson:gson:$gson_version"
+
 }
 
 protobuf {
