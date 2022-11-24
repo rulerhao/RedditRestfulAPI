@@ -19,7 +19,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RedditApiModule {
-    private const val BASE_URL = "https://www.reddit.com/r/Taiwan/hot.json/"
+    private const val BASE_URL = "https://www.reddit.com/"
 
     @Singleton
     @Provides

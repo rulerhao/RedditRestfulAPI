@@ -33,7 +33,7 @@ data class DataX(
     val distinguished: Any,
     val domain: String,
     val downs: Int,
-    val edited: Double,
+    val edited: Any,
     val gilded: Int,
     val gildings: Gildings,
     val hidden: Boolean,

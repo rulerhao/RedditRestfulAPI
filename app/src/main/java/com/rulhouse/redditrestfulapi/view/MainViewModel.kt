@@ -30,7 +30,7 @@ class MainViewModel @Inject constructor(
                 }
                 .collect { baseResult ->
                     when (baseResult) {
-                        is BaseResult.Success -> Log.d(tag, "data: " + baseResult.data)
+                        is BaseResult.Success -> Log.d(tag, "data: " + baseResult.data[0])
                         is BaseResult.Error -> Log.d(tag, "error: " + baseResult.rawResponse)
 
                     }
