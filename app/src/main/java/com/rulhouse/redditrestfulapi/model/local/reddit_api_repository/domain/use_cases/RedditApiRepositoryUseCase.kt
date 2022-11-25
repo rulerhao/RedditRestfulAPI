@@ -1,4 +1,4 @@
-package com.rulhouse.redditrestfulapi.model.local.crawler_repository.domain.use_cases
+package com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.domain.use_cases
 
 data class RedditApiRepositoryUseCase (
     val getRedditApiRepositoryFlow: GetRedditPostsFlow,

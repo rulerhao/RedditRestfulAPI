@@ -1,4 +1,4 @@
-package com.rulhouse.redditrestfulapi.model.local.crawler_repository.domain.repository
+package com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.domain.repository
 
 import com.rulhouse.redditrestfulapi.model.remote.reddit.dto.Post
 import kotlinx.coroutines.flow.Flow

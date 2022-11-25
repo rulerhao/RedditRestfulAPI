@@ -1,4 +1,4 @@
-package com.rulhouse.redditrestfulapi.model.local.crawler_repository.data.data_source
+package com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.data.data_source
 
 import androidx.room.*
 import com.rulhouse.redditrestfulapi.model.remote.reddit.dto.Post

@@ -1,11 +1,11 @@
-package com.rulhouse.redditrestfulapi.model.local.crawler_repository.di
+package com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.di
 
 import android.app.Application
 import androidx.room.Room
-import com.rulhouse.redditrestfulapi.model.local.crawler_repository.data.data_source.RedditApiRepositoryDataBase
-import com.rulhouse.redditrestfulapi.model.local.crawler_repository.domain.repository.RedditApiRepositoryRepository
-import com.rulhouse.redditrestfulapi.model.local.crawler_repository.impl.RedditApiRepositoryImpl
-import com.rulhouse.redditrestfulapi.model.local.crawler_repository.domain.use_cases.*
+import com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.data.data_source.RedditApiRepositoryDataBase
+import com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.domain.repository.RedditApiRepositoryRepository
+import com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.impl.RedditApiRepositoryImpl
+import com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.domain.use_cases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
