@@ -66,9 +66,18 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
+    // Compose
     implementation "androidx.compose.material:material:$compose_version"
+    // Compose 3
     // Material 3
     implementation 'androidx.compose.material3:material3:1.1.0-alpha02'
+
+    // Room
+    implementation("androidx.room:room-runtime:$roomVersion")
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$roomVersion")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$roomVersion")
 
     // hilt
     implementation "com.google.dagger:hilt-android:$hiltVersion"
