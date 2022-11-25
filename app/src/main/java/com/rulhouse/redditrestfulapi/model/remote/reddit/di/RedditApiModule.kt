@@ -1,28 +1,34 @@
-package com.rulhouse.redditrestfulapi.model.reddit.use_case
+package com.rulhouse.redditrestfulapi.model.remote.reddit.di
 
+import com.rulhouse.redditrestfulapi.model.remote.reddit.impl.RedditApiImpl
+import com.rulhouse.redditrestfulapi.model.remote.reddit.repository.RedditApiRepository
+import com.rulhouse.redditrestfulapi.model.remote.reddit.service.RedditApiService
+import com.rulhouse.redditrestfulapi.model.remote.reddit.use_case.GetFirstPosts
+import com.rulhouse.redditrestfulapi.model.remote.reddit.use_case.GetNextPosts
+import com.rulhouse.redditrestfulapi.model.remote.reddit.use_case.RedditApiUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 object RedditApiModule {
-    private const val BASE_URL = "https://www.reddit.com/r/Taiwan/hot.json/"
+    private const val BASE_URL = "https://www.reddit.com/"
 
-    @ActivityScoped
+    @Singleton
     @Provides
     fun providesHttpLoggingInterceptor() = HttpLoggingInterceptor()
         .apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
-    @ActivityScoped
+    @Singleton
     @Provides
     fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient
@@ -30,7 +36,7 @@ object RedditApiModule {
             .addInterceptor(httpLoggingInterceptor)
             .build()
 
-    @ActivityScoped
+    @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
@@ -38,23 +44,24 @@ object RedditApiModule {
         .client(okHttpClient)
         .build()
 
-    @ActivityScoped
+    @Singleton
     @Provides
     fun provideRedditApiService(retrofit: Retrofit): RedditApiService {
         return retrofit.create(RedditApiService::class.java)
     }
 
-    @ActivityScoped
+    @Singleton
     @Provides
     fun providesRepository(redditApiService: RedditApiService): RedditApiRepository {
         return RedditApiImpl(redditApiService)
     }
 
+    @Singleton
     @Provides
-    @ActivityScoped
     fun provideRedditApiUseCases(repository: RedditApiRepository): RedditApiUseCases {
         return RedditApiUseCases(
-            getFirstPost = GetFirstPost(repository)
+            getFirstPosts = GetFirstPosts(repository),
+            getNextPosts = GetNextPosts(repository)
         )
     }
 }

@@ -5,7 +5,7 @@ buildscript {
         coroutines_version = '1.5.2'
         accompanist_version = '0.22.0-rc'
         hiltVersion = '2.44.2'
-        roomVersion = '2.4.2'
+        roomVersion = '2.4.3'
         compose_version = '1.4.0-alpha02'
         landscapist_glide_version = '1.5.2'
         retrofit_version = '2.9.0'

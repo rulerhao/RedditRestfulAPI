@@ -1,3 +1,5 @@
 1. Don't have page options: Refresh too frequently.
 
 2. Use "after" "name" as parameter to get the newest posts.
+
+3. It's possible to get the duplicate post for older posts because hot order would changed through time elapse. And so as the reddit may meet such situaltion.
