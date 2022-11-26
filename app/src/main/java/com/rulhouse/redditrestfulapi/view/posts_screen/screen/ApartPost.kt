@@ -37,13 +37,7 @@ fun ApartPost(
                 .background(Color.LightGray),
             imageModel = { post.thumbnailUri },
             success = {
-                Image(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    bitmap = it.imageBitmap!!,
-                    contentScale = ContentScale.Crop,
-                    contentDescription = null,
-                )
+                SuccessImage(it)
             },
             loading = {
                 CircularProgressIndicator()
