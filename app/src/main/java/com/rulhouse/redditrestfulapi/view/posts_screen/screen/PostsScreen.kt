@@ -66,7 +66,7 @@ fun PostsScreen(
                 ) { item ->
                     Post(
                         post = item,
-                        layoutType = LayoutType.Apart
+                        layoutType = LayoutType.Overlap
                     )
                 }
             }
