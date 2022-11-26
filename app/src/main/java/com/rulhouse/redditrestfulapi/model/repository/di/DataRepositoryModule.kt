@@ -1,7 +1,7 @@
 package com.rulhouse.redditrestfulapi.model.repository.di
 
-import com.rulhouse.redditrestfulapi.model.repository.impl.RepositoryImpl
-import com.rulhouse.redditrestfulapi.model.repository.repository.RepositoryRepository
+import com.rulhouse.redditrestfulapi.model.repository.impl.DataRepositoryImplData
+import com.rulhouse.redditrestfulapi.model.repository.repository.DataRepositoryRepository
 import com.rulhouse.redditrestfulapi.model.repository.use_cases.*
 import dagger.Module
 import dagger.Provides
@@ -11,18 +11,18 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
+object DataRepositoryModule {
 
     @Provides
     @Singleton
-    fun provideRepositoryRepository(): RepositoryRepository {
-        return RepositoryImpl()
+    fun provideRepositoryRepository(): DataRepositoryRepository {
+        return DataRepositoryImplData()
     }
 
     @Provides
     @Singleton
-    fun provideRedditApiRepositoryUseCases(repository: RepositoryRepository): RepositoryUseCases {
-        return RepositoryUseCases(
+    fun provideRedditApiRepositoryUseCases(repository: DataRepositoryRepository): DataRepositoryUseCases {
+        return DataRepositoryUseCases(
             getFirstPosts = GetFirstPosts(repository),
             getNextPosts = GetNextPosts(repository),
             getLocalPosts = GetLocalPosts(repository),

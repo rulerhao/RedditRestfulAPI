@@ -4,11 +4,11 @@ import com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.domain.us
 import com.rulhouse.redditrestfulapi.model.remote.reddit.dto.Post
 import com.rulhouse.redditrestfulapi.model.remote.reddit.use_case.RedditApiUseCases
 import com.rulhouse.redditrestfulapi.model.remote.response.BaseResult
-import com.rulhouse.redditrestfulapi.model.repository.repository.RepositoryRepository
+import com.rulhouse.redditrestfulapi.model.repository.repository.DataRepositoryRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class RepositoryImpl: RepositoryRepository {
+class DataRepositoryImplData: DataRepositoryRepository {
 
     @Inject
     lateinit var apiUseCases: RedditApiUseCases

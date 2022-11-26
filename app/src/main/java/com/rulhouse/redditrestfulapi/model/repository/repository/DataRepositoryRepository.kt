@@ -4,7 +4,7 @@ import com.rulhouse.redditrestfulapi.model.remote.reddit.dto.Post
 import com.rulhouse.redditrestfulapi.model.remote.response.BaseResult
 import kotlinx.coroutines.flow.Flow
 
-interface RepositoryRepository {
+interface DataRepositoryRepository {
 
     suspend fun getFirstPosts(): Flow<BaseResult<List<Post>, Int>>
 
