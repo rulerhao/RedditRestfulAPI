@@ -1,13 +1,16 @@
 package com.rulhouse.redditrestfulapi.view.posts_screen.viewmodel
 
 import android.util.Log
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rulhouse.redditrestfulapi.model.remote.reddit.dto.Post
 import com.rulhouse.redditrestfulapi.model.remote.response.BaseResult
 import com.rulhouse.redditrestfulapi.model.repository.use_cases.DataRepositoryUseCases
 import com.rulhouse.redditrestfulapi.view.posts_screen.event.PostsScreenEvent
+import com.rulhouse.redditrestfulapi.view.posts_screen.state.LayoutType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
@@ -23,8 +26,12 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     val tag = this::class.simpleName
+
     private val _posts = mutableStateListOf<Post>()
     val posts: List<Post> = _posts
+
+    private val _layoutTypes = mutableStateOf(LayoutType.Apart)
+    val layoutTypes: State<LayoutType> = _layoutTypes
 
     private var getPostsJob: Job? = null
 //    init {

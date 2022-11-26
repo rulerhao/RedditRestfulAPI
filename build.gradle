@@ -7,7 +7,7 @@ buildscript {
         hiltVersion = '2.44.2'
         roomVersion = '2.4.3'
         compose_version = '1.4.0-alpha02'
-        landscapist_glide_version = '1.5.2'
+        landscapist_glide_version = '2.1.0'
         retrofit_version = '2.9.0'
         httplogging_version = '5.0.0-alpha.10'
         gson_version = '2.10'

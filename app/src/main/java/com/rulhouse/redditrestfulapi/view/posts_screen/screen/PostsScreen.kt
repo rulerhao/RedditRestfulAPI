@@ -1,7 +1,6 @@
 package com.rulhouse.redditrestfulapi.view.posts_screen.screen
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
@@ -10,8 +9,10 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rulhouse.redditrestfulapi.view.posts_screen.event.PostsScreenEvent
+import com.rulhouse.redditrestfulapi.view.posts_screen.state.LayoutType
 import com.rulhouse.redditrestfulapi.view.posts_screen.viewmodel.MainViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -32,8 +33,14 @@ fun PostsScreen(
     }
     val state = rememberPullRefreshState(refreshing, ::refresh)
 
-    Box {
-        Column {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
             PullRefreshIndicator(refreshing, state)
             Button(
                 onClick = {
@@ -49,9 +56,18 @@ fun PostsScreen(
             ) {
                 Text(text = "Add")
             }
-            LazyColumn() {
-                items(viewModel.posts) { item ->
-                    Text(text = item.title)
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                items(
+                    items = viewModel.posts,
+
+                ) { item ->
+                    Post(
+                        post = item,
+                        layoutType = LayoutType.Apart
+                    )
                 }
             }
         }
