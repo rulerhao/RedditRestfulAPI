@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rulhouse.redditrestfulapi.model.remote.reddit.dto.Children
+import com.rulhouse.redditrestfulapi.model.remote.reddit.dto.Post
 import com.rulhouse.redditrestfulapi.model.remote.reddit.use_case.RedditApiUseCases
 import com.rulhouse.redditrestfulapi.model.remote.response.BaseResult
 import com.rulhouse.redditrestfulapi.view.posts_screen.event.PostsScreenEvent
@@ -23,8 +23,8 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     val tag = this::class.simpleName
-    private val _posts = mutableStateListOf<Children>()
-    val posts: List<Children> = _posts
+    private val _posts = mutableStateListOf<Post>()
+    val posts: List<Post> = _posts
 
     private var getPostsJob: Job? = null
 //    init {

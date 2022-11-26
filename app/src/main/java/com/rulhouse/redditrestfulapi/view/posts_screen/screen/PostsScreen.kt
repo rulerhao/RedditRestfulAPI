@@ -51,7 +51,7 @@ fun PostsScreen(
             }
             LazyColumn() {
                 items(viewModel.posts) { item ->
-                    Text(text = item.data.name)
+                    Text(text = item.title)
                 }
             }
         }

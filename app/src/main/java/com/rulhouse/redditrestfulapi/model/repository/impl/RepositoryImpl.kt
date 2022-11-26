@@ -4,10 +4,11 @@ import com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.domain.us
 import com.rulhouse.redditrestfulapi.model.remote.reddit.dto.Post
 import com.rulhouse.redditrestfulapi.model.remote.reddit.use_case.RedditApiUseCases
 import com.rulhouse.redditrestfulapi.model.remote.response.BaseResult
+import com.rulhouse.redditrestfulapi.model.repository.repository.RepositoryRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class RepositoryImpl {
+class RepositoryImpl: RepositoryRepository {
 
     @Inject
     lateinit var apiUseCases: RedditApiUseCases
@@ -17,7 +18,7 @@ class RepositoryImpl {
 
     private var posts: MutableList<Post> = mutableListOf()
 
-    suspend fun getFirstPosts(): Flow<BaseResult<List<Post>, Int>> {
+    override suspend fun getFirstPosts(): Flow<BaseResult<List<Post>, Int>> {
         return apiUseCases.getFirstPosts().apply {
                 collect { baseResult ->
                     when (baseResult) {
@@ -31,7 +32,7 @@ class RepositoryImpl {
         }
     }
 
-    suspend fun getNextPosts(): Flow<BaseResult<List<Post>, Int>> {
+    override suspend fun getNextPosts(): Flow<BaseResult<List<Post>, Int>> {
         return apiUseCases.getNextPosts().apply {
             collect { baseResult ->
                 when (baseResult) {
@@ -45,7 +46,7 @@ class RepositoryImpl {
         }
     }
 
-    suspend fun getLocalPosts(): Flow<List<Post>> {
+    override suspend fun getLocalPosts(): Flow<List<Post>> {
         return repositoryUseCases.getRedditApiRepositoryFlow().apply {
             collect { localPosts ->
                 posts = localPosts.toMutableList()
@@ -53,7 +54,7 @@ class RepositoryImpl {
         }
     }
 
-    suspend fun insertLocalPosts(posts: List<Post> ) {
+    override suspend fun insertLocalPosts(posts: List<Post>) {
         repositoryUseCases.insertRedditPosts(posts = posts)
     }
 
