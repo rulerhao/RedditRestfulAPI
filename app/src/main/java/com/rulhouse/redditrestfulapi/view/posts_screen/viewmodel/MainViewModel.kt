@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rulhouse.redditrestfulapi.model.remote.reddit.dto.Post
-import com.rulhouse.redditrestfulapi.model.remote.reddit.use_case.RedditApiUseCases
 import com.rulhouse.redditrestfulapi.model.remote.response.BaseResult
+import com.rulhouse.redditrestfulapi.model.repository.use_cases.DataRepositoryUseCases
 import com.rulhouse.redditrestfulapi.view.posts_screen.event.PostsScreenEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val redditApiUseCases: RedditApiUseCases
+    private val dataRepositoryUseCases: DataRepositoryUseCases
 ) : ViewModel() {
 
     val tag = this::class.simpleName
@@ -67,7 +67,7 @@ class MainViewModel @Inject constructor(
 
     private suspend fun getFirstPosts() {
         getPostsJob?.cancel()
-        getPostsJob = redditApiUseCases.getFirstPosts()
+        getPostsJob = dataRepositoryUseCases.getFirstPosts()
             .onStart {
                 Log.d(tag, "onStart")
             }
@@ -88,7 +88,7 @@ class MainViewModel @Inject constructor(
 
     private suspend fun getNextPosts() {
         getPostsJob?.cancel()
-        getPostsJob = redditApiUseCases.getNextPosts()
+        getPostsJob = dataRepositoryUseCases.getNextPosts()
             .onStart {
                 Log.d(tag, "onStart")
             }

@@ -1,30 +1,26 @@
 package com.rulhouse.redditrestfulapi.model.repository.impl
 
-import com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.domain.use_cases.RedditApiRepositoryUseCase
+import com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.domain.use_cases.RedditApiDBUseCases
 import com.rulhouse.redditrestfulapi.model.remote.reddit.dto.Post
 import com.rulhouse.redditrestfulapi.model.remote.reddit.use_case.RedditApiUseCases
 import com.rulhouse.redditrestfulapi.model.remote.response.BaseResult
 import com.rulhouse.redditrestfulapi.model.repository.repository.DataRepositoryRepository
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class DataRepositoryImplData: DataRepositoryRepository {
-
-    @Inject
-    lateinit var apiUseCases: RedditApiUseCases
-
-    @Inject
-    lateinit var repositoryUseCases: RedditApiRepositoryUseCase
+class DataRepositoryImplData(
+    private val redditApiUseCases: RedditApiUseCases,
+    private val redditApiDBUseCases: RedditApiDBUseCases
+): DataRepositoryRepository {
 
     private var posts: MutableList<Post> = mutableListOf()
 
     override suspend fun getFirstPosts(): Flow<BaseResult<List<Post>, Int>> {
-        return apiUseCases.getFirstPosts().apply {
+        return redditApiUseCases.getFirstPosts().apply {
                 collect { baseResult ->
                     when (baseResult) {
                         is BaseResult.Success -> {
                             posts = baseResult.data.toMutableList()
-                            repositoryUseCases.insertRedditPosts(posts = posts)
+                            redditApiDBUseCases.insertRedditPosts(posts = posts)
                         }
                         else -> {}
                     }
@@ -33,12 +29,12 @@ class DataRepositoryImplData: DataRepositoryRepository {
     }
 
     override suspend fun getNextPosts(): Flow<BaseResult<List<Post>, Int>> {
-        return apiUseCases.getNextPosts().apply {
+        return redditApiUseCases.getNextPosts().apply {
             collect { baseResult ->
                 when (baseResult) {
                     is BaseResult.Success -> {
                         posts.addAll(baseResult.data)
-                        repositoryUseCases.insertRedditPosts(posts = posts)
+                        redditApiDBUseCases.insertRedditPosts(posts = posts)
                     }
                     else -> {}
                 }
@@ -47,7 +43,7 @@ class DataRepositoryImplData: DataRepositoryRepository {
     }
 
     override suspend fun getLocalPosts(): Flow<List<Post>> {
-        return repositoryUseCases.getRedditApiRepositoryFlow().apply {
+        return redditApiDBUseCases.getRedditApiRepositoryFlow().apply {
             collect { localPosts ->
                 posts = localPosts.toMutableList()
             }
@@ -55,7 +51,7 @@ class DataRepositoryImplData: DataRepositoryRepository {
     }
 
     override suspend fun insertLocalPosts(posts: List<Post>) {
-        repositoryUseCases.insertRedditPosts(posts = posts)
+        redditApiDBUseCases.insertRedditPosts(posts = posts)
     }
 
 }

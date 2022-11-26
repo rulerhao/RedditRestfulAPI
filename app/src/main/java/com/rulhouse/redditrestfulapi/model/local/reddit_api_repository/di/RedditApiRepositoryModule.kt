@@ -33,8 +33,8 @@ object RedditApiRepositoryModule {
 
     @Provides
     @Singleton
-    fun provideRedditApiRepositoryUseCases(repository: RedditApiRepositoryRepository): RedditApiRepositoryUseCase {
-        return RedditApiRepositoryUseCase(
+    fun provideRedditApiRepositoryUseCases(repository: RedditApiRepositoryRepository): RedditApiDBUseCases {
+        return RedditApiDBUseCases(
             getRedditApiRepositoryFlow = GetRedditPostsFlow(repository),
             insertRedditPosts = InsertRedditPosts(repository)
         )

@@ -1,5 +1,7 @@
 package com.rulhouse.redditrestfulapi.model.repository.di
 
+import com.rulhouse.redditrestfulapi.model.local.reddit_api_repository.domain.use_cases.RedditApiDBUseCases
+import com.rulhouse.redditrestfulapi.model.remote.reddit.use_case.RedditApiUseCases
 import com.rulhouse.redditrestfulapi.model.repository.impl.DataRepositoryImplData
 import com.rulhouse.redditrestfulapi.model.repository.repository.DataRepositoryRepository
 import com.rulhouse.redditrestfulapi.model.repository.use_cases.*
@@ -15,8 +17,11 @@ object DataRepositoryModule {
 
     @Provides
     @Singleton
-    fun provideRepositoryRepository(): DataRepositoryRepository {
-        return DataRepositoryImplData()
+    fun provideRepositoryRepository(
+        redditApiUseCases: RedditApiUseCases,
+        redditApiDBUseCases: RedditApiDBUseCases
+    ): DataRepositoryRepository {
+        return DataRepositoryImplData(redditApiUseCases, redditApiDBUseCases)
     }
 
     @Provides
