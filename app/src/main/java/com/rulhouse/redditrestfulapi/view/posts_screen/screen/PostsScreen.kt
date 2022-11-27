@@ -9,6 +9,7 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rulhouse.redditrestfulapi.view.posts_screen.event.PostsScreenEvent
@@ -36,6 +37,8 @@ fun PostsScreen(
 
     ) {
         Button(
+            modifier = Modifier
+                .align(Alignment.End),
             onClick = {
                 viewModel.onEvent(PostsScreenEvent.OnChangedLayout)
             }
@@ -47,10 +50,10 @@ fun PostsScreen(
                 .fillMaxSize()
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
+                modifier = Modifier,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                PullRefreshIndicator(refreshing, state)
+//                PullRefreshIndicator(refreshing, state)
                 Button(
                     onClick = {
                         viewModel.onEvent(PostsScreenEvent.OnRefresh)
@@ -63,7 +66,7 @@ fun PostsScreen(
                         viewModel.onEvent(PostsScreenEvent.OnGetNewPosts)
                     }
                 ) {
-                    Text(text = "Add")
+                    Text(text = "Read More")
                 }
                 LazyColumn(
                     modifier = Modifier
