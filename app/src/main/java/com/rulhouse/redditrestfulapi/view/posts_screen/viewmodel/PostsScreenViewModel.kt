@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class PostsScreenViewModel @Inject constructor(
     private val dataRepositoryUseCases: DataRepositoryUseCases
 ) : ViewModel() {
 
@@ -40,28 +40,6 @@ class MainViewModel @Inject constructor(
             getFirstPosts()
         }
     }
-//    init {
-//        Log.d("TestRetrofit", "init")
-//        viewModelScope.launch {
-//            redditApiUseCases.getFirstPosts()
-//                .onStart {
-//                    Log.d(tag, "onStart")
-//                }
-//                .catch { exception ->
-//                    Log.d(tag, "catch: ${exception.message}")
-//                }
-//                .collect { baseResult ->
-//                    when (baseResult) {
-//                        is BaseResult.Success -> {
-//                            posts.clear()
-//                            posts.addAll(baseResult.data)
-//                        }
-//                        is BaseResult.Error -> Log.d(tag, "error: " + baseResult.rawResponse)
-//
-//                    }
-//                }
-//        }
-//    }
 
     fun onEvent(event: PostsScreenEvent) {
         when (event) {
@@ -120,7 +98,7 @@ class MainViewModel @Inject constructor(
                     is BaseResult.Success -> {
                         _posts.addAll(baseResult.data)
                     }
-                    is BaseResult.Error -> Log.d(tag, "error: " + baseResult.rawResponse)
+                    is BaseResult.Error -> {}
 
                 }
             }.launchIn(viewModelScope)

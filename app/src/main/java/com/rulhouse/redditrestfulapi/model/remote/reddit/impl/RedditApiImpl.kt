@@ -26,6 +26,7 @@ class RedditApiImpl(private val apiService: RedditApiService): RedditApiReposito
 
     private suspend fun returnFlow(response: Response<RedditApiPostsWrapper>): Flow<BaseResult<List<Post>, Int>> {
         return flow {
+
             if (response.isSuccessful) {
                 val children = response.body()?.data!!.children
                 lastName = children.last().data.name

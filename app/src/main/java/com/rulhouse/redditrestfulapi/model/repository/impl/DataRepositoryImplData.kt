@@ -22,7 +22,8 @@ class DataRepositoryImplData(
                             posts = baseResult.data.toMutableList()
                             redditApiDBUseCases.insertRedditPosts(posts = posts)
                         }
-                        else -> {}
+                        else -> {
+                        }
                     }
                 }
         }
@@ -36,7 +37,8 @@ class DataRepositoryImplData(
                         posts.addAll(baseResult.data)
                         redditApiDBUseCases.insertRedditPosts(posts = posts)
                     }
-                    else -> {}
+                    else -> {
+                    }
                 }
             }
         }

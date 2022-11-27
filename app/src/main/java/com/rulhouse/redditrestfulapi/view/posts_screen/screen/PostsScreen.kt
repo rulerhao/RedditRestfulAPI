@@ -12,15 +12,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rulhouse.redditrestfulapi.view.posts_screen.event.PostsScreenEvent
-import com.rulhouse.redditrestfulapi.view.posts_screen.state.LayoutType
-import com.rulhouse.redditrestfulapi.view.posts_screen.viewmodel.MainViewModel
+import com.rulhouse.redditrestfulapi.view.posts_screen.viewmodel.PostsScreenViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PostsScreen(
-    viewModel: MainViewModel = hiltViewModel(),
+    viewModel: PostsScreenViewModel = hiltViewModel(),
 ) {
     val refreshScope = rememberCoroutineScope()
     var refreshing by remember { mutableStateOf(false) }
