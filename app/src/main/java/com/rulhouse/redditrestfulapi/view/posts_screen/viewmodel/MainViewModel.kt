@@ -13,10 +13,7 @@ import com.rulhouse.redditrestfulapi.view.posts_screen.event.PostsScreenEvent
 import com.rulhouse.redditrestfulapi.view.posts_screen.state.LayoutType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,6 +31,15 @@ class MainViewModel @Inject constructor(
     val layoutTypes: State<LayoutType> = _layoutTypes
 
     private var getPostsJob: Job? = null
+
+    init {
+        viewModelScope.launch {
+            getLocalPosts()
+        }
+        viewModelScope.launch {
+            getFirstPosts()
+        }
+    }
 //    init {
 //        Log.d("TestRetrofit", "init")
 //        viewModelScope.launch {
@@ -67,6 +73,13 @@ class MainViewModel @Inject constructor(
             is PostsScreenEvent.OnGetNewPosts -> {
                 viewModelScope.launch {
                     getNextPosts()
+                }
+            }
+            is PostsScreenEvent.OnChangedLayout -> {
+                if (layoutTypes.value == LayoutType.Overlap) {
+                    _layoutTypes.value = LayoutType.Apart
+                } else {
+                    _layoutTypes.value = LayoutType.Overlap
                 }
             }
         }
@@ -112,4 +125,14 @@ class MainViewModel @Inject constructor(
                 }
             }.launchIn(viewModelScope)
     }
+
+    private suspend fun getLocalPosts() {
+        dataRepositoryUseCases.getLocalPosts()
+            .collect {
+                if (posts.isEmpty()) {
+                    _posts.addAll(it)
+                }
+            }
+    }
+
 }

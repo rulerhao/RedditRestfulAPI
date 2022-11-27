@@ -33,41 +33,52 @@ fun PostsScreen(
     }
     val state = rememberPullRefreshState(refreshing, ::refresh)
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
+    Column(
+
     ) {
-        Column(
+        Button(
+            onClick = {
+                viewModel.onEvent(PostsScreenEvent.OnChangedLayout)
+            }
+        ) {
+            Text(text = viewModel.layoutTypes.value.toString())
+        }
+        Box(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            PullRefreshIndicator(refreshing, state)
-            Button(
-                onClick = {
-                    viewModel.onEvent(PostsScreenEvent.OnRefresh)
-                }
-            ) {
-                Text(text = "Refresh")
-            }
-            Button(
-                onClick = {
-                    viewModel.onEvent(PostsScreenEvent.OnGetNewPosts)
-                }
-            ) {
-                Text(text = "Add")
-            }
-            LazyColumn(
+            Column(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                items(
-                    items = viewModel.posts,
+                PullRefreshIndicator(refreshing, state)
+                Button(
+                    onClick = {
+                        viewModel.onEvent(PostsScreenEvent.OnRefresh)
+                    }
+                ) {
+                    Text(text = "Refresh")
+                }
+                Button(
+                    onClick = {
+                        viewModel.onEvent(PostsScreenEvent.OnGetNewPosts)
+                    }
+                ) {
+                    Text(text = "Add")
+                }
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+                    items(
+                        items = viewModel.posts,
 
-                ) { item ->
-                    Post(
-                        post = item,
-                        layoutType = LayoutType.Overlap
-                    )
+                        ) { item ->
+                        Post(
+                            post = item,
+                            layoutType = viewModel.layoutTypes.value
+                        )
+                    }
                 }
             }
         }
